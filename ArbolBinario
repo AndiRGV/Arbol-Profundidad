@@ -1,0 +1,30 @@
+public class ArbolBinario {
+    private NodoAB raiz;
+    public void insertar(int valor) {
+        raiz = insertarRecursivo(raiz, valor);
+    }
+    private NodoAB insertarRecursivo(NodoAB actual, int valor) {
+        if (actual == null) {
+            return new NodoAB(valor);
+        }
+        if (valor < actual.valor) {
+            actual.izquierda = insertarRecursivo(actual.izquierda, valor);
+        } else if (valor > actual.valor) {
+            actual.derecha = insertarRecursivo(actual.derecha, valor);
+        }
+        return actual;
+    }
+    public int calcularAltura() {
+        return calcularAlturaRecursiva(raiz);
+    }
+    private int calcularAlturaRecursiva(NodoAB nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+
+        int alturaIzquierda = calcularAlturaRecursiva(nodo.izquierda);
+        int alturaDerecha = calcularAlturaRecursiva(nodo.derecha);
+
+        return 1 + Math.max(alturaIzquierda, alturaDerecha);
+    }
+}
